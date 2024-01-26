@@ -114,31 +114,8 @@ def generer_mot_aleatoire(fichier):
     return mot
 
 
-
-
-
-
 probabilites_lettres = compter_lettres('./liste_francais.txt')
 
-# for lettre, probabilité in probabilites_lettres.items():
-#     print(f"La lettre '{lettre}' apparaît avec une probabilité de {probabilité:.4f}")
-
-
-# probabilites_lettres_precedentes = compter_lettres_precedentes('./liste_francais.txt')
-
-# for lettre, precedentes in probabilites_lettres_precedentes.items():
-#     print(f"Lettre: {lettre}")
-#     for precedente, proba in precedentes.items():
-#         print(f"  Précédente: {precedente}, Fréquence: {proba:.4f}%")
-#     print("----")
-
-
 probabilites_double_lettres_precedentes = compter_double_lettres_precedentes('./liste_francais.txt')
-
-# for lettre, double_precedentes in probabilites_double_lettres_precedentes.items():
-#     print(f"Lettre: {lettre}")
-#     for double_precedentes, proba in double_precedentes.items():
-#         print(f"  Précédente: {double_precedentes}, Fréquence: {proba:.8f}%")
-#     print("----")
 
 print(generer_mot_aleatoire('./liste_francais.txt'))
