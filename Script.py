@@ -138,4 +138,6 @@ probabilites_double_lettres_precedentes = compter_double_lettres_precedentes('./
 #         print(f"  Précédente: {double_precedentes}, Fréquence: {proba:.8f}%")
 #     print("----")
 
-print(generer_mot_aleatoire('./liste_francais.txt'))
+
+for i in range(25):
+    print(generer_mot_aleatoire('./liste_francais.txt'))
