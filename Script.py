@@ -72,21 +72,21 @@ def compter_double_lettres_precedentes(fichier):
 def calcul_propa_lettre_suivante(double_lettres, fichier):
     probabilites_double_lettres_precedentes = compter_double_lettres_precedentes(fichier)
     lettres_freq = {}
-    total_freq = 0
+    total_freq = 0.0
 
     for lettre, double_lettre_stat in probabilites_double_lettres_precedentes.items():
         for doubles_lettres_key, double_lettres_freq_key in double_lettre_stat.items():
             if doubles_lettres_key == double_lettres:
                 lettres_freq[lettre] = double_lettres_freq_key
                 total_freq += double_lettres_freq_key
-    
+                
     if total_freq == 0:
-        return {lettre: 0 for lettre in lettres_freq}
+        return {lettre: 1 for lettre in lettres_freq}
     else:
         proba = {lettre: (lettre_freq / total_freq)*100 for lettre, lettre_freq in lettres_freq.items()}
         return proba
     
-
+calcul_propa_lettre_suivante('#o', "./liste_francais.txt")
     
 
 def generer_mot_aleatoire(fichier):
@@ -101,7 +101,6 @@ def generer_mot_aleatoire(fichier):
         double_lettres_precedentes = mot[i-2] + mot[i-1]
 
         lettre_suivante_proba = calcul_propa_lettre_suivante(double_lettres_precedentes, fichier)
-        print(double_lettres_precedentes," : ",lettre_suivante_proba)
         lettre_suivante = random.choices(alphabet, weights=lettre_suivante_proba.values(), k=1)[0]
         if lettre_suivante != "@":
             mot += lettre_suivante
@@ -109,7 +108,7 @@ def generer_mot_aleatoire(fichier):
         else:
             mot_fini = True
 
-    print(mot)
+    mot = mot.replace("#", "")
     return mot
 
 
@@ -140,4 +139,4 @@ probabilites_double_lettres_precedentes = compter_double_lettres_precedentes('./
 #         print(f"  Précédente: {double_precedentes}, Fréquence: {proba:.8f}%")
 #     print("----")
 
-# print(generer_mot_aleatoire('./liste_francais.txt'))
+print(generer_mot_aleatoire('./liste_francais.txt'))
