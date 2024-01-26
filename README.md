@@ -20,7 +20,7 @@ Une fois que les fichiers de texte sont préparés, vous pouvez procéder à l'e
 1.  Naviguez jusqu'au répertoire contenant le script principal.
 2.  Lancez le script en utilisant la commande suivante :
     
-    `python NomDuScriptPrincipal.py`
+    `python Script.py`
     
 
 Contribution
