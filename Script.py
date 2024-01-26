@@ -1,7 +1,10 @@
 import string
 import random
 
+
+## Compte la fréquence d'apparition de chaque lettre dans un fichier donnée
 def compter_lettres(fichier):
+    ## Ajoute les caractères @ et # qui represente la fin et le dubut d'un mot
     alphabet = string.ascii_lowercase + "#" + "@"
     compteur_lettres = dict.fromkeys(alphabet, 0)
     total_lettres = 0
@@ -20,6 +23,7 @@ def compter_lettres(fichier):
 
     return probabilites
 
+## Compte la fréquence d'apparition de chaque lettre avant une autre lettre dans un fichier
 def compter_lettres_precedentes(fichier):
     alphabet = string.ascii_lowercase
     compteur_lettres = {lettre: {precedente: 0 for precedente in alphabet} for lettre in alphabet}
@@ -41,6 +45,7 @@ def compter_lettres_precedentes(fichier):
 
     return probabilites
 
+## Compte la fréquence d'apparition de chaque double lettre precedent une lettre dans un fichier
 def compter_double_lettres_precedentes(fichier):
     alphabet = string.ascii_lowercase + "#" + "@"
     compteur_lettres = {lettre: {premiere_precedente + deuxieme_precedente: 0 for premiere_precedente in alphabet for deuxieme_precedente in alphabet} for lettre in alphabet}
@@ -48,6 +53,7 @@ def compter_double_lettres_precedentes(fichier):
 
     with open(fichier, 'r', encoding='utf-8') as f:
         for lettre_globale in alphabet:
+            ## réinitialiser le curseur de lecture au début du fichier a chaque itération
             f.seek(0)
             for ligne in f:
                 mots = ligne.strip().lower().split()
@@ -68,6 +74,7 @@ def compter_double_lettres_precedentes(fichier):
     probabilites = {lettre: {paire_precedentes: (compteur / total_lettres[lettre])*100 if total_lettres[lettre] != 0 else 0 for paire_precedentes, compteur in compteur_lettres[lettre].items()} for lettre in alphabet}
     return probabilites
 
+## Calcul la proba d'une lettre suivante selon les deux lettres precedentes
 def calcul_propa_lettre_suivante(double_lettres, fichier):
     probabilites_double_lettres_precedentes = compter_double_lettres_precedentes(fichier)
     lettres_freq = {}
@@ -110,6 +117,7 @@ def generer_mot_aleatoire(fichier):
         else:
             mot_fini = True
 
+    ## Des caracteres qui se trouvent uniquement en debut ou en fin de mot, donc pas d'inscidence
     mot = mot.replace("#", "").replace("@", "")
     return mot
 
@@ -117,13 +125,6 @@ def generer_mot_aleatoire(fichier):
 probabilites_lettres = compter_lettres('./liste_francais.txt')
 
 probabilites_double_lettres_precedentes = compter_double_lettres_precedentes('./liste_francais.txt')
-
-# for lettre, double_precedentes in probabilites_double_lettres_precedentes.items():
-#     print(f"Lettre: {lettre}")
-#     for double_precedentes, proba in double_precedentes.items():
-#         print(f"  Précédente: {double_precedentes}, Fréquence: {proba:.8f}%")
-#     print("----")
-
 
 for i in range(25):
     print(generer_mot_aleatoire('./liste_francais.txt'))
