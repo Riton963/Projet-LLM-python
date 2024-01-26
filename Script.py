@@ -60,13 +60,12 @@ def compter_double_lettres_precedentes(fichier):
                             else:
                                 deuxieme_precedente = "#"
 
-                            paire_precedentes = premiere_precedente + deuxieme_precedente
+                            paire_precedentes = deuxieme_precedente + premiere_precedente
                             if paire_precedentes in compteur_lettres[lettre_globale]:
                                 compteur_lettres[lettre_globale][paire_precedentes] += 1
                                 total_lettres[lettre_globale] += 1
 
     probabilites = {lettre: {paire_precedentes: (compteur / total_lettres[lettre])*100 if total_lettres[lettre] != 0 else 0 for paire_precedentes, compteur in compteur_lettres[lettre].items()} for lettre in alphabet}
-
     return probabilites
 
 def calcul_propa_lettre_suivante(double_lettres, fichier):
