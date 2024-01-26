@@ -15,7 +15,7 @@ Assurez-vous que le script a correctement modifié les fichiers de texte comme p
 Exécution du script principal
 -----------------------------
 
-Une fois que les fichiers de texte sont préparés, vous pouvez procéder à l'exécution du script principal.
+Une fois que le fichier de texte est préparés, vous pouvez procéder à l'exécution du script principal.
 
 1.  Naviguez jusqu'au répertoire contenant le script principal.
 2.  Lancez le script en utilisant la commande suivante :
